@@ -1,7 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <link rel="icon" type="image/png" href="https://drive.google.com/thumbnail?id=1mN39uinRmOQGj04B5OfC9ZTPtlXyF1mb&sz=256">
   <base target="_top">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -148,11 +148,11 @@
 
     <div class="head">
 
-   <a href="https://aljawahirdev.github.io/home/">
-  <img class="logo"
-       src="https://drive.google.com/thumbnail?id=1mN39uinRmOQGj04B5OfC9ZTPtlXyF1mb&sz=w1000"
-       alt="شعار جمعية الجواهر بقمار" />
-</a>
+      <img
+        id="logo"
+        class="logo"
+        src="https://scontent.fogx1-1.fna.fbcdn.net/v/t39.30808-6/327352070_2989580661351512_6179979542828320358_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHb9JHku7ZSuDNWpQMw8cY3iiVEWEa9k1CKJURYRr2TUH9bCAsJ_V6KYA7P9Tpl46IxYiOOBR5SiIqLUwNUmMuv&_nc_ohc=2dsdjb8gSYAQ7kNvwH116-X&_nc_oc=Adpj1lt1Lv4WVdwbVnp7YBj-HRnoP-jOpVRI-pnQiYHqM-6Zrps1Cn_jJwDzaIazkQs&_nc_zt=23&_nc_ht=scontent.fogx1-1.fna&_nc_gid=29j2LbQnb1HhvB3ulWQBvQ&_nc_ss=7b2a8&oh=00_Af487u07jo1GsC6WG2-gBINmj99JOdOzfeE2H0BDpti-cw&oe=6A0B7008"
+      >
 
       <div>
 
@@ -252,7 +252,34 @@
 ====================================== */
 
 const GS_URL =
-"https://script.google.com/macros/s/AKfycbyeJ2EFL1QJkZMAXKyLlIGE9H3J96kz0Kz2av43GYakY3EBoapu37DoPu2fypQxqqwwmg/exec"
+"https://script.google.com/macros/s/AKfycbzqoKozZ9imd6NvV1DT1P0ZdjLBRzn5mjOQ04-XGa2MZBPZIbTgKmQpThP0FFaEjKBNBw/exec"
+
+async function apiCall(action,args){
+
+  const response =
+  await fetch(GS_URL,{
+
+    method:'POST',
+
+    headers:{
+      'Content-Type':'text/plain;charset=utf-8'
+    },
+
+    body:JSON.stringify({
+      action:action,
+      args:args || []
+    })
+  })
+
+  const result =
+  await response.json()
+
+  if(!result.ok){
+    throw new Error(result.error || 'خطأ غير معروف')
+  }
+
+  return result.data
+}
 
 
 function setMsg(text,type){
@@ -426,32 +453,57 @@ async function submitRequest(){
       )
     }
 
-    const response =
-    await fetch(GS_URL,{
-
-      method:'POST',
-
-      headers:{
-        'Content-Type':'application/json'
-      },
-
-      body:JSON.stringify(data)
-    })
-
     const result =
-    await response.json()
+    await apiCall('submitExternalLoanRequest',[data])
 
     setMsg(
-      'تم إرسال الطلب بنجاح',
+      'تم إرسال الطلب بنجاح. رقم الطلب: ' + (result.requestNo || ''),
       'ok'
     )
 
     console.log(result)
 
+    document.querySelectorAll('input,textarea').forEach(el=>{
+      if(el.type === 'file') el.value = ''
+      else if(el.id !== 'loanDate') el.value = ''
+    })
+    expectedReturnDate.value = ''
+    notes.value = ''
+    loanDate.value = today()
+    loadFormData()
+
   }catch(err){
 
     setMsg(
-      'حدث خطأ أثناء الإرسال',
+      'حدث خطأ أثناء الإرسال: ' + (err.message || ''),
+      'error'
+    )
+
+    console.error(err)
+  }
+}
+
+async function loadFormData(){
+
+  try{
+
+    const data =
+    await apiCall('getRequestFormData',[])
+
+    if(data.identity && data.identity.logoUrl){
+      logo.src = data.identity.logoUrl
+    }
+
+    itemId.innerHTML =
+    '<option value="">اختر العتاد المطلوب</option>' +
+    (data.equipment || []).map(item =>
+      `<option value="${String(item.id).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}">${String(item.inventoryNo || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')} - ${String(item.name || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')} (${item.quantity} متاح)</option>`
+    ).join('')
+
+  }catch(err){
+
+    setMsg(
+      'تعذر تحميل قائمة العتاد المتوفر',
       'error'
     )
 
@@ -462,6 +514,8 @@ async function submitRequest(){
 window.onload = ()=>{
 
   loanDate.value = today()
+
+  loadFormData()
 }
 
 </script>
