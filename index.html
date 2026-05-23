@@ -8,14 +8,20 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
+  <link rel="preconnect" href="https://script.google.com">
+  <link rel="preconnect" href="https://script.googleusercontent.com">
+  <link rel="dns-prefetch" href="https://script.google.com">
+  <link rel="dns-prefetch" href="https://script.googleusercontent.com">
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-
     :root{
       --primary:#2986B0;
+      --primary-light:#7ED6D1;
       --accent:#F59E0B;
+      --gold-brown:#A86417;
+      --ink:#222222;
+      --surface:#F5F5F5;
       --bg:#f6f8fb;
       --border:#e5e7eb;
       --danger:#b91c1c;
@@ -29,8 +35,8 @@
 
     body{
       margin:0;
-      background:linear-gradient(135deg,#e0f2fe,#fff);
-      color:#1e293b
+      background:linear-gradient(135deg,#E9F7F8,#F5F5F5,#fff);
+      color:var(--ink)
     }
 
     .wrap{
@@ -44,7 +50,8 @@
       border-radius:26px;
       padding:24px;
       box-shadow:0 16px 45px #0001;
-      border:1px solid #dbeafe
+      border:1px solid #CDEEEF;
+      border-top:5px solid var(--accent)
     }
 
     .head{
@@ -52,6 +59,16 @@
       gap:14px;
       align-items:center;
       margin-bottom:18px
+    }
+
+    .logo-link{
+      display:inline-flex;
+      width:78px;
+      height:78px;
+      border-radius:50%;
+      text-decoration:none;
+      flex:0 0 auto;
+      cursor:pointer
     }
 
     .logo{
@@ -68,7 +85,7 @@
     }
 
     .status{
-      color:#64748b;
+      color:#596575;
       font-size:13px
     }
 
@@ -133,53 +150,107 @@
 
     .hint{
       font-size:12px;
-      color:#64748b;
+      color:#596575;
       margin-top:5px
     }
 
+    .receipt-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px
+    }
+
+    .receipt-action-btn{
+      flex:1;
+      min-width:180px;
+      border:0;
+      border-radius:12px;
+      padding:12px 14px;
+      font-weight:800;
+      cursor:pointer;
+      color:#fff;
+      background:linear-gradient(135deg,#2986B0,#7ED6D1)
+    }
+
+    .receipt-action-btn.secondary{
+      background:linear-gradient(135deg,#A86417,#F59E0B)
+    }
+
+    .upload-progress-box{
+      display:none;
+      margin-top:12px;
+      padding:10px 12px;
+      border:1px solid #CDEEEF;
+      border-radius:14px;
+      background:#F0FDFA
+    }
+
+    .upload-progress-box.active{
+      display:block
+    }
+
+    .upload-progress-text{
+      font-size:13px;
+      font-weight:800;
+      color:#0f766e;
+      margin-bottom:7px
+    }
+
+    .upload-progress-track{
+      width:100%;
+      height:7px;
+      overflow:hidden;
+      border-radius:999px;
+      background:#dbeafe
+    }
+
+    .upload-progress-bar{
+      width:0%;
+      height:100%;
+      border-radius:999px;
+      background:linear-gradient(90deg,#14b8a6,#7ED6D1,#2986B0);
+      transition:width .45s ease
+    }
+
+    @media (max-width:640px){
+      .wrap{margin:0;padding:8px}
+      .card{border-radius:16px;padding:14px}
+      .head{align-items:flex-start;gap:10px}
+      .logo-link,.logo{width:56px;height:56px}
+      .head h1{font-size:18px;line-height:1.4}
+      .grid{grid-template-columns:1fr;gap:10px}
+      input,select,textarea{font-size:14px;padding:12px;border-radius:12px}
+      .submit{font-size:15px;padding:13px}
+      .receipt-actions{flex-direction:column}
+      .receipt-action-btn{min-width:100%}
+    }
   </style>
 </head>
 
 <body>
 
 <div class="wrap">
-
   <div class="card">
-
     <div class="head">
-
-      <img
-        id="logo"
-        class="logo"
-        src="https://scontent.fogx1-1.fna.fbcdn.net/v/t39.30808-6/327352070_2989580661351512_6179979542828320358_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHb9JHku7ZSuDNWpQMw8cY3iiVEWEa9k1CKJURYRr2TUH9bCAsJ_V6KYA7P9Tpl46IxYiOOBR5SiIqLUwNUmMuv&_nc_ohc=2dsdjb8gSYAQ7kNvwH116-X&_nc_oc=Adpj1lt1Lv4WVdwbVnp7YBj-HRnoP-jOpVRI-pnQiYHqM-6Zrps1Cn_jJwDzaIazkQs&_nc_zt=23&_nc_ht=scontent.fogx1-1.fna&_nc_gid=29j2LbQnb1HhvB3ulWQBvQ&_nc_ss=7b2a8&oh=00_Af487u07jo1GsC6WG2-gBINmj99JOdOzfeE2H0BDpti-cw&oe=6A0B7008"
-      >
+      <a class="logo-link" href="https://aljawahirdev.github.io/home/" target="_top" aria-label="العودة إلى الصفحة الرئيسية">
+        <img id="logo" class="logo" src="https://drive.google.com/thumbnail?id=1mN39uinRmOQGj04B5OfC9ZTPtlXyF1mb&sz=256" alt="شعار جمعية الجواهر" loading="eager" decoding="async" referrerpolicy="no-referrer">
+      </a>
 
       <div>
-
         <h1>طلب إعارة عتاد</h1>
-
-        <div class="status">
-          جمعية الجواهر بقمار
-        </div>
-
-        <div class="hint">
-          كل المعلومات إجبارية
-        </div>
-
+        <div class="status">جمعية الجواهر بقمار - نظام طلبات العتاد الإلكتروني | رقم الاعتماد: 2018/10 | الهاتف: 032233730</div>
+        <div class="hint">كل المعلومات إجبارية، وسيتم إصدار وصل إيداع الطلب بعد الإرسال مباشرة.</div>
       </div>
-
     </div>
 
     <div class="grid">
-
       <select id="itemId" required>
         <option value="">اختر العتاد المطلوب</option>
       </select>
 
       <input id="borrower" placeholder="اسم طالب الطلب" required>
-
       <input id="contact" placeholder="رقم الهاتف" required>
-
       <input id="address" placeholder="الجهة / العنوان" required>
 
       <select id="identityType" required onchange="toggleBackHint()">
@@ -192,332 +263,885 @@
       </select>
 
       <input id="identityNo" placeholder="رقم الهوية" required>
-
       <input id="identityIssuer" placeholder="الهوية الصادرة عن الجهة" required>
-
       <input id="identityIssueDate" type="date" required>
-
       <input id="patientName" placeholder="اسم المريض" required>
-
       <input id="relationship" placeholder="صلة القرابة" required>
-
       <input id="city" placeholder="المدينة" required>
-
       <input id="loanDate" type="date" required>
-
       <input id="expectedReturnDate" type="date" required>
 
       <div>
-
-        <div class="label">
-          صورة الهوية من الأمام
-        </div>
-
+        <div class="label">صورة الهوية من الأمام</div>
         <input id="idFrontImage" type="file" accept="image/*" required>
-
       </div>
 
       <div>
-
-        <div class="label" id="backLabel">
-          صورة الهوية من الخلف
-        </div>
-
+        <div class="label" id="backLabel">صورة الهوية من الخلف</div>
         <input id="idBackImage" type="file" accept="image/*" required>
-
       </div>
 
-      <textarea
-        id="notes"
-        class="full"
-        placeholder="ملاحظات إضافية">
-      </textarea>
-
+      <textarea id="notes" class="full" placeholder="ملاحظات إضافية"></textarea>
     </div>
 
-    <button class="submit" onclick="submitRequest()">
-      إرسال الطلب
-    </button>
+    <div id="uploadProgressBox" class="upload-progress-box" aria-live="polite">
+      <div id="uploadProgressText" class="upload-progress-text">جاري معالجة طلبك… يرجى الانتظار حتى يكتمل شريط التقدّم.</div>
+      <div class="upload-progress-track"><div id="uploadProgressBar" class="upload-progress-bar"></div></div>
+    </div>
 
+    <button id="submitBtn" class="submit" onclick="submitRequest()">إرسال الطلب</button>
     <div id="msg"></div>
-
   </div>
-
 </div>
 
 <script>
-
 /* ======================================
    رابط Google Apps Script
 ====================================== */
+const GS_URL = "https://script.google.com/macros/s/AKfycbyAxSmn2hE5snbJrxRr7jjlFwY1lfQFIv9-K2llqnNbHM97CnTjbSQwccQZrOdbmbU-/exec";
 
-const GS_URL =
-"https://script.google.com/macros/s/AKfycbyAxSmn2hE5snbJrxRr7jjlFwY1lfQFIv9-K2llqnNbHM97CnTjbSQwccQZrOdbmbU-/exec"
+const CUSTOM_LOGO_URL = "https://drive.google.com/thumbnail?id=1mN39uinRmOQGj04B5OfC9ZTPtlXyF1mb&sz=256";
+const HOME_URL = "https://aljawahirdev.github.io/home/";
+const EMBEDDED_LOGO_DATA_URI = CUSTOM_LOGO_URL;
+let logoDataUrlPromise = null;
+let lastReceiptHtml = '';
+let lastReceiptNo = '';
 
-async function apiCall(action,args){
-
-  const response =
-  await fetch(GS_URL,{
-
-    method:'POST',
-
-    headers:{
-      'Content-Type':'text/plain;charset=utf-8'
-    },
-
-    body:JSON.stringify({
-      action:action,
-      args:args || []
-    })
-  })
-
-  const result =
-  await response.json()
-
-  if(!result.ok){
-    throw new Error(result.error || 'خطأ غير معروف')
-  }
-
-  return result.data
+function initLogoFallback() {
+  const logo = document.getElementById('logo');
+  if (!logo) return;
+  logo.dataset.dataUrl = EMBEDDED_LOGO_DATA_URI;
+  if (!logo.getAttribute('src')) logo.src = EMBEDDED_LOGO_DATA_URI;
+  logo.onerror = () => {
+    logo.onerror = null;
+    logo.src = EMBEDDED_LOGO_DATA_URI;
+    logo.dataset.dataUrl = EMBEDDED_LOGO_DATA_URI;
+  };
 }
 
+async function imageUrlToDataUrl(url) {
+  if (!url || String(url).startsWith('data:')) return url || EMBEDDED_LOGO_DATA_URI;
+  try {
+    const response = await fetch(url, { cache: 'force-cache' });
+    if (!response.ok) throw new Error('تعذر تحميل الشعار');
+    const blob = await response.blob();
+    return await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  } catch (err) {
+    console.warn('سيتم استعمال رابط الشعار بسبب تعذر تضمينه:', err);
+    return url || EMBEDDED_LOGO_DATA_URI;
+  }
+}
+
+function cacheLogoDataUrl(url) {
+  const logo = document.getElementById('logo');
+  const source = url || (logo && logo.getAttribute('src')) || CUSTOM_LOGO_URL;
+  logoDataUrlPromise = imageUrlToDataUrl(source).then(dataUrl => {
+    const safeDataUrl = dataUrl || source || CUSTOM_LOGO_URL;
+    if (logo) logo.dataset.dataUrl = safeDataUrl;
+    return safeDataUrl;
+  });
+  return logoDataUrlPromise;
+}
+
+function warmLogoCache() {
+  if (logoDataUrlPromise) return logoDataUrlPromise;
+  const start = () => cacheLogoDataUrl(CUSTOM_LOGO_URL);
+  if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 2000 });
+  else setTimeout(start, 300);
+  return logoDataUrlPromise;
+}
+
+async function ensureLogoDataUrl() {
+  const logo = document.getElementById('logo');
+  if (logoDataUrlPromise) return await logoDataUrlPromise;
+  if (logo && logo.dataset.dataUrl) return logo.dataset.dataUrl;
+  return await cacheLogoDataUrl((logo && logo.getAttribute('src')) || CUSTOM_LOGO_URL);
+}
+
+function getReceiptLogoUrl() {
+  const logo = document.getElementById('logo');
+  if (!logo) return EMBEDDED_LOGO_DATA_URI;
+  return logo.dataset.dataUrl || logo.src || EMBEDDED_LOGO_DATA_URI;
+}
+
+async function apiCall(action,args){
+  const response = await fetch(GS_URL,{
+    method:'POST',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body:JSON.stringify({action:action,args:args || []})
+  });
+
+  const text = await response.text();
+  let result;
+  try{
+    result = JSON.parse(text);
+  }catch(e){
+    throw new Error('رد السيرفر ليس JSON: ' + text);
+  }
+
+  if(!result.ok){
+    throw new Error(result.error || result.description || 'خطأ غير معروف');
+  }
+
+  return result.data;
+}
 
 function setMsg(text,type){
+  const msgDiv = document.getElementById('msg');
+  msgDiv.innerHTML = `<div class="${type}">${text}</div>`;
+}
 
-  msg.innerHTML =
-  `<div class="${type}">${text}</div>`
+function escapeHtml(value) {
+  return String(value == null || value === '' ? '-' : value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function cleanOptionText(value) {
+  return String(value || '').replace(/\s+/g, ' ').trim() || '-';
+}
+
+function getSelectedOptionText(selectId) {
+  const select = document.getElementById(selectId);
+  if (!select || !select.options || select.selectedIndex < 0) return '-';
+  return cleanOptionText(select.options[select.selectedIndex].textContent || select.value || '-');
+}
+
+function formatDateOnly(value) {
+  if (!value) return '-';
+  const parts = String(value).split('-');
+  if (parts.length === 3) return `${parts[2]}-${parts[1]}-${parts[0]}`;
+  return value;
+}
+
+function currentDepositDateTime() {
+  const d = new Date();
+  const pad = n => String(n).padStart(2, '0');
+  return `${pad(d.getDate())}-${pad(d.getMonth() + 1)}-${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
 function today(){
-
-  return new Date()
-  .toISOString()
-  .slice(0,10)
+  return new Date().toISOString().slice(0,10);
 }
 
 function toggleBackHint(){
+  const identityType = document.getElementById('identityType');
+  const idBackImage = document.getElementById('idBackImage');
+  const backLabel = document.getElementById('backLabel');
+  const pass = identityType.value === 'جواز سفر';
+  idBackImage.required = !pass;
+  backLabel.textContent = pass ? 'صورة جواز السفر' : 'صورة الهوية من الخلف';
+}
 
-  const pass =
-  identityType.value === 'جواز سفر'
+function nextFrame() {
+  return new Promise(resolve => requestAnimationFrame(resolve));
+}
 
-  idBackImage.required = !pass
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-  backLabel.textContent = pass
-  ? 'صورة جواز السفر'
-  : 'صورة الهوية من الخلف'
+function setSubmitting(isSubmitting, text) {
+  const btn = document.getElementById('submitBtn');
+  if (!btn) return;
+  btn.disabled = !!isSubmitting;
+  btn.style.opacity = isSubmitting ? '0.65' : '1';
+  btn.style.cursor = isSubmitting ? 'not-allowed' : 'pointer';
+  btn.textContent = isSubmitting ? (text || 'جاري الإرسال...') : 'إرسال الطلب';
+}
+
+function setUploadProgress(percent, text) {
+  const box = document.getElementById('uploadProgressBox');
+  const bar = document.getElementById('uploadProgressBar');
+  const label = document.getElementById('uploadProgressText');
+  if (!box || !bar || !label) return;
+  box.classList.add('active');
+  bar.style.width = Math.max(0, Math.min(100, percent)) + '%';
+  if (text) label.textContent = text;
+}
+
+function resetUploadProgress() {
+  const box = document.getElementById('uploadProgressBox');
+  const bar = document.getElementById('uploadProgressBar');
+  const label = document.getElementById('uploadProgressText');
+  if (!box || !bar || !label) return;
+  bar.style.width = '0%';
+  label.textContent = 'جاري معالجة طلبك… يرجى الانتظار حتى يكتمل شريط التقدّم.';
+  box.classList.remove('active');
+}
+
+function hasFile(inputId) {
+  const input = document.getElementById(inputId);
+  return !!(input && input.files && input.files.length && input.files[0]);
+}
+
+const compressedCache = new Map();
+const supportsWebp = (() => {
+  try {
+    const c = document.createElement('canvas');
+    return c.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+  } catch(e) { return false; }
+})();
+
+function fileKey(file) {
+  return file ? [file.name, file.size, file.lastModified].join('|') : '';
+}
+
+function dataUrlBytes(dataUrl) {
+  const comma = dataUrl.indexOf(',');
+  const base64 = comma >= 0 ? dataUrl.slice(comma + 1) : dataUrl;
+  return Math.ceil(base64.length * 0.75);
+}
+
+function shrinkCanvas(sourceCanvas, factor) {
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.max(320, Math.round(sourceCanvas.width * factor));
+  canvas.height = Math.max(320, Math.round(sourceCanvas.height * factor));
+  const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'medium';
+  ctx.drawImage(sourceCanvas, 0, 0, canvas.width, canvas.height);
+  return canvas;
+}
+
+function canvasToDataURLFast(canvas) {
+  const mime = supportsWebp ? 'image/webp' : 'image/jpeg';
+  const qualities = supportsWebp ? [0.30, 0.24, 0.20, 0.18] : [0.34, 0.29, 0.25, 0.22];
+  const targetBytes = 85 * 1024;
+  let working = canvas;
+  let best = working.toDataURL(mime, qualities[0]);
+
+  for (let round = 0; round < 3; round++) {
+    for (const q of qualities) {
+      const current = working.toDataURL(mime, q);
+      if (dataUrlBytes(current) < dataUrlBytes(best)) best = current;
+      if (dataUrlBytes(current) <= targetBytes) return current;
+    }
+    const largestSide = Math.max(working.width, working.height);
+    if (largestSide <= 360) break;
+    working = shrinkCanvas(working, 0.82);
+  }
+  return best;
 }
 
 async function compressImage(inputId){
+  const input = document.getElementById(inputId);
+  const file = input && input.files && input.files.length ? input.files[0] : null;
+  if(!file) return '';
 
-  const file =
-  document.getElementById(inputId).files[0]
+  const key = inputId + '|' + fileKey(file);
+  if (compressedCache.has(key)) return compressedCache.get(key);
 
-  if(!file) return ''
-
-  return new Promise((resolve,reject)=>{
-
-    const img = new Image()
-
-    const reader = new FileReader()
-
-    reader.onload = e => {
-
-      img.onload = ()=>{
-
-        const canvas =
-        document.createElement('canvas')
-
-        let w = img.width
-        let h = img.height
-
-        const max = 1100
-
-        if(w > h && w > max){
-
-          h = h * max / w
-          w = max
-
-        }else if(h > max){
-
-          w = w * max / h
-          h = max
-        }
-
-        canvas.width = w
-        canvas.height = h
-
-        const ctx =
-        canvas.getContext('2d')
-
-        ctx.drawImage(img,0,0,w,h)
-
-        resolve(
-          canvas.toDataURL(
-            'image/jpeg',
-            0.72
-          )
-        )
-      }
-
-      img.src = e.target.result
+  const job = (async () => {
+    const maxSide = 500;
+    let bitmap;
+    try {
+      bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
+    } catch(e) {
+      bitmap = await new Promise((resolve, reject) => {
+        const img = new Image();
+        const reader = new FileReader();
+        reader.onload = ev => { img.onload = () => resolve(img); img.onerror = reject; img.src = ev.target.result; };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
     }
 
-    reader.readAsDataURL(file)
-  })
+    let w = bitmap.width;
+    let h = bitmap.height;
+    if (w > h && w > maxSide) { h = Math.round(h * maxSide / w); w = maxSide; }
+    else if (h >= w && h > maxSide) { w = Math.round(w * maxSide / h); h = maxSide; }
+
+    const canvas = document.createElement('canvas');
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'medium';
+    ctx.drawImage(bitmap, 0, 0, w, h);
+    if (bitmap.close) bitmap.close();
+    return canvasToDataURLFast(canvas);
+  })();
+
+  compressedCache.set(key, job);
+  return job;
+}
+
+async function compressImages(inputIds) {
+  const uniqueIds = [...new Set(inputIds.filter(Boolean))];
+  const pairs = await Promise.all(uniqueIds.map(async id => [id, await compressImage(id)]));
+  return Object.fromEntries(pairs);
+}
+
+function warmCompress(inputId) {
+  const start = () => compressImage(inputId).catch(err => console.warn('تعذر الضغط المسبق:', inputId, err));
+  if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 500 });
+  else setTimeout(start, 30);
+}
+
+function attachBackgroundCompression() {
+  ['idFrontImage','idBackImage'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('change', () => {
+      warmCompress(id);
+      setMsg('تم اختيار الصورة وسيتم ضغطها في الخلفية قبل الإرسال.', 'ok');
+    }, { passive: true });
+  });
 }
 
 function validate(){
-
   const required = [
-
-    'itemId',
-    'borrower',
-    'contact',
-    'address',
-    'identityType',
-    'identityNo',
-    'identityIssuer',
-    'identityIssueDate',
-    'patientName',
-    'relationship',
-    'city',
-    'loanDate',
-    'expectedReturnDate'
-  ]
+    'itemId','borrower','contact','address','identityType','identityNo','identityIssuer',
+    'identityIssueDate','patientName','relationship','city','loanDate','expectedReturnDate'
+  ];
 
   for(const id of required){
-
-    if(!document.getElementById(id).value.trim()){
-
-      setMsg(
-        'يرجى ملء كل الحقول',
-        'error'
-      )
-
-      return false
+    const el = document.getElementById(id);
+    if(!el || !el.value.trim()){
+      setMsg('يرجى ملء كل الحقول', 'error');
+      return false;
     }
   }
 
-  return true
+  if (!hasFile('idFrontImage')) {
+    setMsg('يرجى رفع صورة الهوية من الأمام', 'error');
+    return false;
+  }
+
+  if (document.getElementById('identityType').value !== 'جواز سفر' && !hasFile('idBackImage')) {
+    setMsg('يرجى رفع صورة الهوية من الخلف', 'error');
+    return false;
+  }
+
+  return true;
+}
+
+function buildReceiptRow(label, value) {
+  return `<div class="receipt-field"><div class="receipt-label">${escapeHtml(label)}</div><div class="receipt-value">${escapeHtml(value)}</div></div>`;
+}
+
+function qrUtf8Bytes(text) {
+  const normalized = String(text == null ? '' : text);
+  if (window.TextEncoder) return Array.from(new TextEncoder().encode(normalized));
+  return normalized.split('').map(ch => ch.charCodeAt(0) & 255);
+}
+
+function qrMakeDataUri(text) {
+  const version = 4;
+  const size = 17 + version * 4;
+  const dataCapacity = 80;
+  const ecCodewords = 20;
+  const modules = Array.from({ length: size }, () => Array(size).fill(null));
+  const isFunction = Array.from({ length: size }, () => Array(size).fill(false));
+
+  const setFunction = (x, y, dark) => {
+    if (x < 0 || y < 0 || x >= size || y >= size) return;
+    modules[y][x] = !!dark;
+    isFunction[y][x] = true;
+  };
+  const reserve = (x, y) => {
+    if (x < 0 || y < 0 || x >= size || y >= size) return;
+    isFunction[y][x] = true;
+  };
+
+  function drawFinder(x, y) {
+    for (let dy = -1; dy <= 7; dy++) {
+      for (let dx = -1; dx <= 7; dx++) {
+        const xx = x + dx, yy = y + dy;
+        const inCore = dx >= 0 && dx <= 6 && dy >= 0 && dy <= 6;
+        const dark = inCore && (dx === 0 || dx === 6 || dy === 0 || dy === 6 || (dx >= 2 && dx <= 4 && dy >= 2 && dy <= 4));
+        setFunction(xx, yy, dark);
+      }
+    }
+  }
+
+  function drawAlignment(cx, cy) {
+    for (let dy = -2; dy <= 2; dy++) {
+      for (let dx = -2; dx <= 2; dx++) {
+        const dark = Math.max(Math.abs(dx), Math.abs(dy)) !== 1;
+        setFunction(cx + dx, cy + dy, dark);
+      }
+    }
+  }
+
+  drawFinder(0, 0);
+  drawFinder(size - 7, 0);
+  drawFinder(0, size - 7);
+  for (let i = 8; i < size - 8; i++) {
+    setFunction(i, 6, i % 2 === 0);
+    setFunction(6, i, i % 2 === 0);
+  }
+  drawAlignment(26, 26);
+  setFunction(8, size - 8, true);
+
+  for (let i = 0; i < 9; i++) {
+    if (i !== 6) {
+      reserve(8, i);
+      reserve(i, 8);
+    }
+  }
+  for (let i = 0; i < 8; i++) {
+    reserve(size - 1 - i, 8);
+    reserve(8, size - 1 - i);
+  }
+
+  const bytes = qrUtf8Bytes(text).slice(0, 78);
+  const bits = [];
+  const appendBits = (value, length) => {
+    for (let i = length - 1; i >= 0; i--) bits.push((value >>> i) & 1);
+  };
+  appendBits(0x4, 4);
+  appendBits(bytes.length, 8);
+  bytes.forEach(b => appendBits(b, 8));
+  const maxBits = dataCapacity * 8;
+  appendBits(0, Math.min(4, maxBits - bits.length));
+  while (bits.length % 8) bits.push(0);
+  const data = [];
+  for (let i = 0; i < bits.length; i += 8) data.push(bits.slice(i, i + 8).reduce((a, b) => (a << 1) | b, 0));
+  for (let pad = 0; data.length < dataCapacity; pad++) data.push(pad % 2 ? 0x11 : 0xEC);
+
+  const exp = new Array(512), log = new Array(256);
+  let x = 1;
+  for (let i = 0; i < 255; i++) {
+    exp[i] = x;
+    log[x] = i;
+    x <<= 1;
+    if (x & 0x100) x ^= 0x11D;
+  }
+  for (let i = 255; i < 512; i++) exp[i] = exp[i - 255];
+  const gfMul = (a, b) => (a && b) ? exp[log[a] + log[b]] : 0;
+
+  function rsDivisor(degree) {
+    const result = new Array(degree).fill(0);
+    result[degree - 1] = 1;
+    let root = 1;
+    for (let i = 0; i < degree; i++) {
+      for (let j = 0; j < degree; j++) {
+        result[j] = gfMul(result[j], root);
+        if (j + 1 < degree) result[j] ^= result[j + 1];
+      }
+      root = gfMul(root, 2);
+    }
+    return result;
+  }
+
+  const divisor = rsDivisor(ecCodewords);
+  const ecc = new Array(ecCodewords).fill(0);
+  data.forEach(byte => {
+    const factor = byte ^ ecc.shift();
+    ecc.push(0);
+    for (let i = 0; i < ecCodewords; i++) ecc[i] ^= gfMul(divisor[i], factor);
+  });
+  const allCodewords = data.concat(ecc);
+  const allBits = [];
+  allCodewords.forEach(b => appendCodewordBits(b, allBits));
+  function appendCodewordBits(value, target) {
+    for (let i = 7; i >= 0; i--) target.push((value >>> i) & 1);
+  }
+
+  let bitIndex = 0;
+  for (let right = size - 1; right >= 1; right -= 2) {
+    if (right === 6) right--;
+    for (let vert = 0; vert < size; vert++) {
+      const y = ((right + 1) & 2) === 0 ? size - 1 - vert : vert;
+      for (let j = 0; j < 2; j++) {
+        const xx = right - j;
+        if (!isFunction[y][xx]) {
+          modules[y][xx] = bitIndex < allBits.length ? !!allBits[bitIndex] : false;
+          bitIndex++;
+        }
+      }
+    }
+  }
+
+  const mask = (xx, yy) => ((xx + yy) % 2) === 0;
+  for (let yy = 0; yy < size; yy++) {
+    for (let xx = 0; xx < size; xx++) {
+      if (!isFunction[yy][xx] && mask(xx, yy)) modules[yy][xx] = !modules[yy][xx];
+    }
+  }
+
+  function formatBits(errorLevelBits, maskPattern) {
+    const dataBits = (errorLevelBits << 3) | maskPattern;
+    let rem = dataBits;
+    for (let i = 0; i < 10; i++) rem = (rem << 1) ^ (((rem >>> 9) & 1) ? 0x537 : 0);
+    return ((dataBits << 10) | (rem & 0x3FF)) ^ 0x5412;
+  }
+  const fmt = formatBits(1, 0);
+  const getBit = (val, i) => ((val >>> i) & 1) !== 0;
+  for (let i = 0; i <= 5; i++) setFunction(8, i, getBit(fmt, i));
+  setFunction(8, 7, getBit(fmt, 6));
+  setFunction(8, 8, getBit(fmt, 7));
+  setFunction(7, 8, getBit(fmt, 8));
+  for (let i = 9; i < 15; i++) setFunction(14 - i, 8, getBit(fmt, i));
+  for (let i = 0; i < 8; i++) setFunction(size - 1 - i, 8, getBit(fmt, i));
+  for (let i = 8; i < 15; i++) setFunction(8, size - 15 + i, getBit(fmt, i));
+
+  const quiet = 4;
+  const total = size + quiet * 2;
+  const rects = [];
+  for (let yy = 0; yy < size; yy++) {
+    for (let xx = 0; xx < size; xx++) {
+      if (modules[yy][xx]) rects.push(`M${xx + quiet},${yy + quiet}h1v1h-1z`);
+    }
+  }
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${total} ${total}" shape-rendering="crispEdges"><rect width="100%" height="100%" fill="#fff"/><path d="${rects.join('')}" fill="#000"/></svg>`;
+  return 'data:image/svg+xml;base64,' + btoa(svg);
+}
+
+function buildQrPayload(requestNo) {
+  return 'EQUIPMENT_REQUEST:' + String(requestNo || '-').trim();
+}
+
+function createReceiptData(data, result) {
+  return {
+    requestNo: result.requestNo || result.id || '-',
+    depositDate: result.depositDate || result.createdAt || currentDepositDateTime(),
+    status: 'تم إيداع الطلب إلكترونيا',
+    applicantName: data.borrower || '-',
+    contact: data.contact || '-',
+    address: data.address || '-',
+    city: data.city || '-',
+    identityType: data.identityType || '-',
+    identityNo: data.identityNo || '-',
+    identityIssuer: data.identityIssuer || '-',
+    identityIssueDate: data.identityIssueDate || '-',
+    patientName: data.patientName || '-',
+    relationship: data.relationship || '-',
+    loanDate: data.loanDate || '-',
+    expectedReturnDate: data.expectedReturnDate || '-',
+    equipmentText: data.equipmentText || '-',
+    equipmentId: data.itemId || '-',
+    notes: data.notes || '-',
+    logoUrl: getReceiptLogoUrl()
+  };
+}
+
+function buildReceiptHtml(r) {
+  const title = 'وصل إيداع طلب إعارة عتاد';
+  const todayText = formatDateOnly(String(r.depositDate).slice(0, 10));
+  const qrPayload = buildQrPayload(r.requestNo);
+  const qrDataUri = qrMakeDataUri(qrPayload);
+  return `<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${escapeHtml(title)} - ${escapeHtml(r.requestNo)}</title>
+<style>
+  :root{--primary:#2986B0;--light:#7ED6D1;--accent:#F59E0B;--ink:#1f2937;--muted:#64748b;--line:#cfe3ec;--soft:#f8fbfc}
+  *{box-sizing:border-box;font-family:Cairo,Tahoma,Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{margin:0;background:#eef5f7;color:var(--ink)}
+  .page{width:210mm;min-height:297mm;margin:0 auto;background:white;padding:8mm 9mm;display:flex;flex-direction:column;position:relative;overflow:visible}
+  .top-line{height:4px;background:linear-gradient(90deg,var(--primary),var(--light),var(--accent));border-radius:10px;margin-bottom:7px;flex:0 0 auto}
+  .header{display:grid;grid-template-columns:1fr 116px 1fr;align-items:center;gap:8px;border-bottom:1.5px solid var(--primary);padding-bottom:7px;margin-bottom:6px;flex:0 0 auto}
+  .head-side{font-size:8.6px;line-height:1.55;color:#334155;font-weight:600}
+  .head-side.left{text-align:left;direction:rtl}
+  .center{text-align:center}
+  .logo{width:54px;height:54px;object-fit:contain;border:1.5px solid var(--primary);border-radius:9px;margin-bottom:2px;background:#fff}
+  .assoc{font-weight:800;color:var(--primary);font-size:12px;line-height:1.2}
+  .subtitle{font-weight:700;font-size:8.2px;line-height:1.45}
+  .doc-title{display:inline-block;background:linear-gradient(135deg,var(--primary),var(--light));color:white;border-radius:10px;padding:5px 22px;font-size:14px;font-weight:800;margin:0 auto 6px;box-shadow:0 5px 12px #0001}
+  .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:5px;flex:0 0 auto}
+  .box{border:1px solid var(--line);border-radius:7px;background:#fff;padding:4px 6px;min-height:34px;overflow-wrap:anywhere}
+  .box .lbl{font-size:7.8px;color:var(--muted);font-weight:800;margin-bottom:1px;line-height:1.25}
+  .box .val{font-size:10px;font-weight:800;color:#111827;line-height:1.25;overflow-wrap:anywhere}
+  .box.status-box{grid-column:span 2}
+  .note{border:1px solid #f4c76c;background:#fffbeb;border-radius:7px;padding:4px 7px;font-size:7.8px;line-height:1.55;margin-bottom:5px;flex:0 0 auto}
+  .section{border:1px solid var(--line);border-radius:8px;margin-top:5px;overflow:hidden;flex:0 0 auto;break-inside:avoid}
+  .section-title{background:linear-gradient(90deg,#eef8fb,#fff);color:var(--primary);font-weight:800;font-size:9px;padding:4px 7px;border-bottom:1px solid var(--line);line-height:1.35}
+  .receipt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:5px;background:white}
+  .receipt-field{border:1px solid #e2e8f0;border-radius:6px;padding:4px 5px;min-height:31px;background:#fff;overflow-wrap:anywhere;white-space:normal}
+  .receipt-label{font-size:7.4px;color:#64748b;font-weight:800;margin-bottom:1px;line-height:1.2}
+  .receipt-value{font-size:9.4px;font-weight:800;color:#111827;line-height:1.28;overflow-wrap:anywhere;word-break:break-word;white-space:normal}
+  .wide{grid-column:span 2}
+  .full{grid-column:1/-1}
+  .commitment{padding:5px 9px;font-size:8.4px;line-height:1.55;overflow-wrap:anywhere;white-space:pre-wrap}
+  .footer{margin-top:auto;border:1.5px solid var(--primary);border-radius:10px;padding:7px;background:#fff;display:grid;grid-template-columns:72px 1fr;gap:10px;align-items:stretch;flex:0 0 auto;break-inside:avoid}
+  .qr-wrap{border-left:1px dashed #94a3b8;padding-left:8px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+  .qr{width:62px;height:62px;image-rendering:pixelated;display:block}
+  .qr-label{font-size:7px;color:#64748b;font-weight:800;line-height:1.2}
+  .footer-content{display:flex;flex-direction:column;min-width:0}
+  .date-place{text-align:left;font-size:11px;font-weight:800;margin-bottom:4px;line-height:1.3}
+  .small-note{font-size:7px;color:#64748b;text-align:center;border-bottom:1px dashed #94a3b8;padding-bottom:4px;margin-bottom:6px;line-height:1.35}
+  .signatures{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;font-size:8.4px;font-weight:800;min-height:36px;line-height:1.35}
+  .signatures span{display:block;margin-top:5px;font-weight:600;color:#64748b}
+  @media print{body{background:white}.page{margin:0;box-shadow:none;width:210mm;min-height:297mm}.no-print{display:none}@page{size:A4;margin:0}}
+  @media screen and (max-width:800px){.page{width:100%;min-height:auto;padding:12px}.header{grid-template-columns:1fr}.head-side,.head-side.left{text-align:center}.meta,.receipt-grid{grid-template-columns:1fr}.box.status-box,.wide{grid-column:auto}.footer{grid-template-columns:1fr;margin-top:14px}.qr-wrap{border-left:0;border-bottom:1px dashed #94a3b8;padding:0 0 8px}.signatures{grid-template-columns:1fr}.doc-title{font-size:13px;padding:6px 16px}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="top-line"></div>
+  <div class="header">
+    <div class="head-side right">
+      الجمهورية الجزائرية الديمقراطية الشعبية<br>
+      وزارة الداخلية والجماعات المحلية والتهيئة العمرانية<br>
+      ولاية الوادي - دائرة قمار
+    </div>
+    <div class="center">
+      ${r.logoUrl ? `<img class="logo" src="${escapeHtml(r.logoUrl)}" alt="شعار الجمعية">` : ''}
+      <div class="assoc">جمعية<br>الجواهر<br>بقمار</div>
+      <div class="subtitle">جمعية ذات طابع اجتماعي إنساني وخيري</div>
+    </div>
+    <div class="head-side left">
+      بيانات الجمعية<br>
+      رقم الاعتماد: 2018/10<br>
+      العنوان: قمار - ولاية الوادي<br>
+      الهاتف: 032233730
+    </div>
+  </div>
+  <div class="center"><div class="doc-title">${escapeHtml(title)}</div></div>
+  <div class="meta">
+    <div class="box"><div class="lbl">رقم الطلب</div><div class="val">${escapeHtml(r.requestNo)}</div></div>
+    <div class="box"><div class="lbl">تاريخ الإيداع</div><div class="val">${escapeHtml(r.depositDate)}</div></div>
+    <div class="box status-box"><div class="lbl">الحالة</div><div class="val">${escapeHtml(r.status)}</div></div>
+  </div>
+  <div class="note"><strong>تنبيه:</strong> هذا الوصل يثبت إيداع طلب إعارة العتاد إلكترونيا لدى الجمعية، ولا يعد تأكيدا نهائيا إلا بعد المراجعة والاتصال بصاحب الطلب.</div>
+  <div class="section">
+    <div class="section-title">1) بيانات المواطن / مقدم الطلب</div>
+    <div class="receipt-grid">
+      ${buildReceiptRow('اسم مقدم الطلب', r.applicantName)}
+      ${buildReceiptRow('رقم الهاتف', r.contact)}
+      ${buildReceiptRow('البلدية / المدينة', r.city)}
+      ${buildReceiptRow('العنوان', r.address)}
+      ${buildReceiptRow('نوع الهوية', r.identityType)}
+      ${buildReceiptRow('رقم الهوية', r.identityNo)}
+      ${buildReceiptRow('جهة إصدار الهوية', r.identityIssuer)}
+      ${buildReceiptRow('تاريخ إصدار الهوية', formatDateOnly(r.identityIssueDate))}
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">2) بيانات المستفيد / المريض</div>
+    <div class="receipt-grid">
+      ${buildReceiptRow('اسم المريض', r.patientName)}
+      ${buildReceiptRow('صلة القرابة', r.relationship)}
+      ${buildReceiptRow('تاريخ الطلب', formatDateOnly(r.loanDate))}
+      ${buildReceiptRow('تاريخ الإرجاع المتوقع', formatDateOnly(r.expectedReturnDate))}
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">3) بيانات العتاد المطلوب</div>
+    <div class="receipt-grid">
+      <div class="receipt-field wide"><div class="receipt-label">العتاد المختار</div><div class="receipt-value">${escapeHtml(r.equipmentText)}</div></div>
+      ${buildReceiptRow('معرف العتاد', r.equipmentId)}
+      ${buildReceiptRow('مدة الإعارة المتوقعة', formatDateOnly(r.loanDate) + ' إلى ' + formatDateOnly(r.expectedReturnDate))}
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">4) ملاحظات الطلب</div>
+    <div class="commitment">${escapeHtml(r.notes)}</div>
+  </div>
+  <div class="footer">
+    <div class="qr-wrap">
+      <img class="qr" src="${qrDataUri}" alt="رمز QR لرقم الطلب">
+      <div class="qr-label">رمز QR للتحقق</div>
+      <div class="qr-label">${escapeHtml(r.requestNo)}</div>
+    </div>
+    <div class="footer-content">
+      <div class="date-place">حرر بقمار في: ${escapeHtml(todayText)}</div>
+      <div class="small-note">يحتفظ المواطن بهذا الوصل إلى غاية معالجة الطلب. يمكن مسح رمز QR أو تقديم رقم الطلب عند التواصل مع الجمعية.</div>
+      <div class="signatures">
+        <div>     <span> </span></div>
+        <div>       <span> </span></div>
+        <div>   <span> </span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>`;
+}
+
+function receiptActionsHtml(requestNo) {
+  return `<div class="receipt-actions">
+    <button type="button" class="receipt-action-btn" onclick="printReceipt()">طباعة وصل الطلب</button>
+    <button type="button" class="receipt-action-btn secondary" onclick="downloadReceipt()">تنزيل وصل الطلب</button>
+  </div>`;
+}
+
+function waitForReceiptImages(win, timeoutMs = 1800) {
+  const images = Array.from(win.document.images || []);
+  if (!images.length) return Promise.resolve();
+  const waits = images.map(img => img.complete ? Promise.resolve() : new Promise(resolve => {
+    img.onload = img.onerror = resolve;
+  }));
+  return Promise.race([
+    Promise.all(waits),
+    new Promise(resolve => setTimeout(resolve, timeoutMs))
+  ]);
+}
+
+async function printReceipt() {
+  if (!lastReceiptHtml) {
+    setMsg('لا يوجد وصل جاهز للطباعة. يرجى إرسال الطلب أولا.', 'error');
+    return;
+  }
+
+  const blob = new Blob([lastReceiptHtml], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const win = window.open(url, '_blank');
+
+  if (!win) {
+    URL.revokeObjectURL(url);
+    setMsg('تعذر فتح نافذة الطباعة. يرجى السماح بالنوافذ المنبثقة ثم إعادة المحاولة.', 'error');
+    return;
+  }
+
+  let didPrint = false;
+  const openPrintDialog = async () => {
+    if (didPrint) return;
+    didPrint = true;
+    try {
+      await waitForReceiptImages(win);
+      win.focus();
+      win.print();
+    } finally {
+      setTimeout(() => URL.revokeObjectURL(url), 30000);
+    }
+  };
+
+  win.addEventListener('load', openPrintDialog, { once: true });
+  setTimeout(() => {
+    try {
+      if (win.document && win.document.readyState === 'complete') openPrintDialog();
+    } catch (err) {
+      openPrintDialog();
+    }
+  }, 500);
+}
+
+function safeFileName(value) {
+  return String(value || 'طلب').replace(/[\\/:*?"<>|\s]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+}
+
+function downloadReceipt() {
+  if (!lastReceiptHtml) {
+    setMsg('لا يوجد وصل جاهز للتنزيل. يرجى إرسال الطلب أولا.', 'error');
+    return;
+  }
+  const blob = new Blob([lastReceiptHtml], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'وصل-طلب-عتاد-' + safeFileName(lastReceiptNo || 'طلب') + '.html';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 async function submitRequest(){
+  if(!validate()) return;
 
-  if(!validate()) return
-
-  setMsg(
-    'جاري إرسال الطلب...',
-    'ok'
-  )
+  setSubmitting(true, 'جاري التحضير...');
+  setUploadProgress(8, 'جاري معالجة طلبك… يرجى الانتظار حتى يكتمل شريط التقدّم.');
+  setMsg('يتم الآن ضغط الصور وإرسال بيانات الطلب. لا تغلق الصفحة حتى يكتمل التحميل.', 'ok');
+  await nextFrame();
 
   try{
+    setSubmitting(true, 'ضغط سريع...');
+    setUploadProgress(25, 'جاري ضغط الصور...');
+    const images = await compressImages(['idFrontImage','idBackImage']);
+
+    setSubmitting(true, 'جاري الإرسال...');
+    setUploadProgress(65, 'جاري إرسال الطلب والملفات...');
 
     const data = {
+      itemId:document.getElementById('itemId').value,
+      equipmentText:getSelectedOptionText('itemId'),
+      borrower:document.getElementById('borrower').value,
+      contact:document.getElementById('contact').value,
+      address:document.getElementById('address').value,
+      identityType:document.getElementById('identityType').value,
+      identityNo:document.getElementById('identityNo').value,
+      identityIssuer:document.getElementById('identityIssuer').value,
+      identityIssueDate:document.getElementById('identityIssueDate').value,
+      patientName:document.getElementById('patientName').value,
+      relationship:document.getElementById('relationship').value,
+      city:document.getElementById('city').value,
+      loanDate:document.getElementById('loanDate').value,
+      expectedReturnDate:document.getElementById('expectedReturnDate').value,
+      notes:document.getElementById('notes').value,
+      idFrontImage:images.idFrontImage,
+      idBackImage:images.idBackImage
+    };
 
-      itemId:itemId.value,
+    setUploadProgress(80, 'جاري إيداع الطلب في النظام...');
+    const result = await apiCall('submitExternalLoanRequest',[data]);
 
-      borrower:borrower.value,
+    setUploadProgress(95, 'جاري تجهيز وصل الطلب...');
+    await ensureLogoDataUrl();
+    const receiptData = createReceiptData(data, result || {});
+    lastReceiptNo = receiptData.requestNo || '';
+    lastReceiptHtml = buildReceiptHtml(receiptData);
 
-      contact:contact.value,
+    setUploadProgress(100, 'اكتمل إرسال الطلب بنجاح.');
+    await delay(700);
+    resetUploadProgress();
 
-      address:address.value,
-
-      identityType:identityType.value,
-
-      identityNo:identityNo.value,
-
-      identityIssuer:identityIssuer.value,
-
-      identityIssueDate:identityIssueDate.value,
-
-      patientName:patientName.value,
-
-      relationship:relationship.value,
-
-      city:city.value,
-
-      loanDate:loanDate.value,
-
-      expectedReturnDate:expectedReturnDate.value,
-
-      notes:notes.value,
-
-      idFrontImage:
-      await compressImage(
-        'idFrontImage'
-      ),
-
-      idBackImage:
-      await compressImage(
-        'idBackImage'
-      )
-    }
-
-    const result =
-    await apiCall('submitExternalLoanRequest',[data])
-
-    setMsg(
-      'تم إرسال الطلب بنجاح. رقم الطلب: ' + (result.requestNo || ''),
-      'ok'
-    )
-
-    console.log(result)
+    setMsg('تم إرسال الطلب بنجاح. رقم الطلب: ' + (receiptData.requestNo || '') + receiptActionsHtml(receiptData.requestNo), 'ok');
 
     document.querySelectorAll('input,textarea').forEach(el=>{
-      if(el.type === 'file') el.value = ''
-      else if(el.id !== 'loanDate') el.value = ''
-    })
-    expectedReturnDate.value = ''
-    notes.value = ''
-    loanDate.value = today()
-    loadFormData()
-
+      if(el.type === 'file') el.value = '';
+      else if(el.id !== 'loanDate' && el.id !== 'identityIssueDate') el.value = '';
+    });
+    document.getElementById('expectedReturnDate').value = '';
+    document.getElementById('notes').value = '';
+    document.getElementById('loanDate').value = today();
+    document.getElementById('identityIssueDate').value = today();
+    compressedCache.clear();
+    loadFormData();
   }catch(err){
-
-    setMsg(
-      'حدث خطأ أثناء الإرسال: ' + (err.message || ''),
-      'error'
-    )
-
-    console.error(err)
+    resetUploadProgress();
+    setMsg('حدث خطأ أثناء الإرسال: ' + (err.message || ''), 'error');
+    console.error(err);
+  }finally{
+    setSubmitting(false);
   }
 }
 
 async function loadFormData(){
-
   try{
-
-    const data =
-    await apiCall('getRequestFormData',[])
+    const data = await apiCall('getRequestFormData',[]);
 
     if(data.identity && data.identity.logoUrl){
-      logo.src = data.identity.logoUrl
+      const logo = document.getElementById('logo');
+      logo.src = data.identity.logoUrl;
+      logo.dataset.dataUrl = data.identity.logoUrl;
+      cacheLogoDataUrl(data.identity.logoUrl);
+    } else {
+      warmLogoCache();
     }
 
-    itemId.innerHTML =
+    document.getElementById('itemId').innerHTML =
     '<option value="">اختر العتاد المطلوب</option>' +
     (data.equipment || []).map(item =>
       `<option value="${String(item.id).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}">${String(item.inventoryNo || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')} - ${String(item.name || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')} (${item.quantity} متاح)</option>`
-    ).join('')
+    ).join('');
 
   }catch(err){
-
-    setMsg(
-      'تعذر تحميل قائمة العتاد المتوفر',
-      'error'
-    )
-
-    console.error(err)
+    setMsg('تعذر تحميل قائمة العتاد المتوفر', 'error');
+    console.error(err);
   }
 }
 
 window.onload = ()=>{
-
-  loanDate.value = today()
-
-  loadFormData()
-}
-
+  initLogoFallback();
+  warmLogoCache();
+  document.getElementById('loanDate').value = today();
+  document.getElementById('identityIssueDate').value = today();
+  attachBackgroundCompression();
+  loadFormData();
+};
 </script>
 
 </body>
